@@ -9,6 +9,7 @@ import thesis.backend.mailing.exception.AuthenticationExceptions.EmailTypeNotFou
 import thesis.backend.mailing.exception.AuthenticationExceptions.IncorrectEmailPasswordException;
 import thesis.backend.mailing.exception.AuthenticationExceptions.MalformedEmailTemplateException;
 import thesis.backend.mailing.exception.AuthenticationExceptions.SendEmailException;
+import thesis.backend.mailing.exception.ReportExceptions.ReportGenerationException;
 import thesis.backend.mailing.model.Response.Response;
 
 import java.util.NoSuchElementException;
@@ -65,6 +66,14 @@ public class GlobalExceptionHandler {
         Response<Void> response = new Response<>("Send Email Exception occurred", HttpStatus.BAD_REQUEST.value(), e.toString(), null);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ReportGenerationException.class)
+    public ResponseEntity<Response<Void>> handleReportGenerationExcpetion(ReportGenerationException e) {
+        log.warn("Report Generation Exception occurred: ", e);
+        Response<Void> response = new Response<>("Report Generation Exception occurred", HttpStatus.BAD_REQUEST.value(), e.toString(), null);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<Void>> handleGenericException(Exception e) {

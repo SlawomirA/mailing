@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RestController
-@RequestMapping("authenticationController")
+@RequestMapping("emailController")
 @Scope("request")
 public class EmailController {
 
